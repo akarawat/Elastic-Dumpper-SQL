@@ -154,7 +154,7 @@ namespace WorkerTest
                             {
                                 //DateTime.ParseExact(dr["empDOB"].toString(), "dd/MM/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
                                 DateTime rowDt = (DateTime)row["ProductionDate"];
-                                txtRow += " \"ProductionDate\": \"" + rowDt.ToString("yyyy-MM-dd") + "T" + rowDt.ToString("hh:mm:ss") + "Z" + "\",";
+                                txtRow += " \"ProductionDate\": \"" + rowDt.ToString("yyyy-MM-dd") + "T" + rowDt.ToString("HH:mm:ss") + "Z" + "\",";
                             }
                             else
                             {
@@ -167,7 +167,7 @@ namespace WorkerTest
                                 //txtRow += " \"DateTime\": \"" + pdDate[0] + "T" + pdDate[1] + "Z" + "\"";
 
                                 DateTime rowDt = (DateTime)row["DateTime"];
-                                txtRow += " \"DateTime\": \"" + rowDt.ToString("yyyy-MM-dd") + "T" + rowDt.ToString("hh:mm:ss") + "Z" + "\"";
+                                txtRow += " \"DateTime\": \"" + rowDt.ToString("yyyy-MM-dd") + "T" + rowDt.ToString("HH:mm:ss") + "Z" + "\"";
                             }
                             else
                             {
