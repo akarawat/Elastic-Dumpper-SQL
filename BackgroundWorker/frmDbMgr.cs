@@ -122,16 +122,24 @@ namespace WorkerTest
                             
                             byte[] salt = (byte[])row["UID"];
                             string sUid;
-                            
+
+                            int cZero = 0;
                             foreach (int arruid in salt)
                             {
                                 sUid = arruid.ToString("x");
-                                
+
+                                if (sUid == "0") { cZero++; }
+                                else cZero = 0;
+                                if (cZero >= 6) break;
+
                                 if (sUid.Length == 1) sUid = "0" + sUid;
                                 cmbUid += sUid.ToUpper();
-                                                                
+                                
+                                
                             }
-                            cmbUid = cmbUid.Substring(0, 34);
+
+                            //cmbUid = cmbUid.Substring(0, 34);
+
                             if (File.Exists("DebugUID.txt") && chkDebug.Checked)
                             {
                                 StreamWriter w = File.AppendText("DebugUID.txt");

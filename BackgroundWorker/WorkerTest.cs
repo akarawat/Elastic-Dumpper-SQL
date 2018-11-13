@@ -127,7 +127,6 @@ namespace WorkerTest
             string file;            //name of file to analyse
             long fileLength;        //store total number bytes to process
             long bytesProcessed;    //Count the characters processed
-            int nextChar;           //stores each char to analyse
             int progress;           //percentage for progress reporting
             BackgroundWorker worker = sender as BackgroundWorker;   //who called us
                        
@@ -329,6 +328,12 @@ namespace WorkerTest
         private void WorkerTest_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnJson_Click(object sender, EventArgs e)
+        {
+            jSonResult frmJson = new jSonResult();
+            frmJson.Show();
         }
     }
 }

@@ -45,6 +45,7 @@
             this.txtType = new System.Windows.Forms.TextBox();
             this.txtUrl = new System.Windows.Forms.TextBox();
             this.btnMgrDb = new System.Windows.Forms.Button();
+            this.btnJson = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LstStatus
@@ -209,6 +210,18 @@
             this.btnMgrDb.UseVisualStyleBackColor = true;
             this.btnMgrDb.Click += new System.EventHandler(this.btnMgrDb_Click);
             // 
+            // btnJson
+            // 
+            this.btnJson.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnJson.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnJson.Location = new System.Drawing.Point(369, 449);
+            this.btnJson.Name = "btnJson";
+            this.btnJson.Size = new System.Drawing.Size(45, 23);
+            this.btnJson.TabIndex = 13;
+            this.btnJson.Text = "JSON";
+            this.btnJson.UseVisualStyleBackColor = true;
+            this.btnJson.Click += new System.EventHandler(this.btnJson_Click);
+            // 
             // WorkerTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -218,6 +231,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtType);
             this.Controls.Add(this.txtUrl);
+            this.Controls.Add(this.btnJson);
             this.Controls.Add(this.btnMgrDb);
             this.Controls.Add(this.ButClear);
             this.Controls.Add(this.LblPercent);
@@ -256,6 +270,7 @@
         private System.Windows.Forms.TextBox txtType;
         private System.Windows.Forms.TextBox txtUrl;
         private System.Windows.Forms.Button btnMgrDb;
+        private System.Windows.Forms.Button btnJson;
     }
 }
 

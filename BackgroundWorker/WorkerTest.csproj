@@ -59,6 +59,12 @@
     <Compile Include="frmDbMgr.Designer.cs">
       <DependentUpon>frmDbMgr.cs</DependentUpon>
     </Compile>
+    <Compile Include="jSonResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="jSonResult.Designer.cs">
+      <DependentUpon>jSonResult.cs</DependentUpon>
+    </Compile>
     <Compile Include="WorkerTest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +75,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmDbMgr.resx">
       <DependentUpon>frmDbMgr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="jSonResult.resx">
+      <DependentUpon>jSonResult.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WorkerTest.resx">
       <DependentUpon>WorkerTest.cs</DependentUpon>
