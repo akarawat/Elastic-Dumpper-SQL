@@ -55,6 +55,7 @@
             this.chkDebug = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.cbxJson = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -169,10 +170,10 @@
             // txtQuery
             // 
             this.txtQuery.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.txtQuery.Location = new System.Drawing.Point(29, 313);
+            this.txtQuery.Location = new System.Drawing.Point(29, 316);
             this.txtQuery.Multiline = true;
             this.txtQuery.Name = "txtQuery";
-            this.txtQuery.Size = new System.Drawing.Size(667, 162);
+            this.txtQuery.Size = new System.Drawing.Size(667, 159);
             this.txtQuery.TabIndex = 15;
             this.txtQuery.Text = "select SmartracBatch, ChipLot, IdentifierChip, IdentifierOS, IdentifierOSVersion," +
     " UID, BoxNr, status, teststatus, info1, info2, info3, info4, info5, ProductionDa" +
@@ -290,7 +291,7 @@
             // chkDebug
             // 
             this.chkDebug.AutoSize = true;
-            this.chkDebug.Location = new System.Drawing.Point(370, 273);
+            this.chkDebug.Location = new System.Drawing.Point(370, 293);
             this.chkDebug.Name = "chkDebug";
             this.chkDebug.Size = new System.Drawing.Size(123, 17);
             this.chkDebug.TabIndex = 21;
@@ -318,6 +319,18 @@
             this.pictureBox1.TabIndex = 22;
             this.pictureBox1.TabStop = false;
             // 
+            // cbxJson
+            // 
+            this.cbxJson.AutoSize = true;
+            this.cbxJson.ForeColor = System.Drawing.Color.DarkGreen;
+            this.cbxJson.Location = new System.Drawing.Point(370, 273);
+            this.cbxJson.Name = "cbxJson";
+            this.cbxJson.Size = new System.Drawing.Size(107, 17);
+            this.cbxJson.TabIndex = 21;
+            this.cbxJson.Text = "Create JSON File";
+            this.cbxJson.UseVisualStyleBackColor = true;
+            this.cbxJson.CheckedChanged += new System.EventHandler(this.cbxJson_CheckedChanged);
+            // 
             // frmDbMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -325,6 +338,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(721, 582);
             this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.cbxJson);
             this.Controls.Add(this.chkDebug);
             this.Controls.Add(this.lblSucc);
             this.Controls.Add(this.lblRows);
@@ -388,5 +402,6 @@
         private System.Windows.Forms.CheckBox chkDebug;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.CheckBox cbxJson;
     }
 }

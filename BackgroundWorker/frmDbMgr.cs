@@ -78,7 +78,14 @@ namespace WorkerTest
                 string query = txtQuery.Text.Trim();
                 if (OpenConnection() == true)
                 {
-
+                    if (DUMMPER && cbxJson.Checked)
+                    {
+                        string path = @"json\" + txtView.Text + ".json";
+                        if (!File.Exists(path))
+                        {
+                            File.Create(path).Dispose();
+                        }
+                    }
                     try
                     {
                         if (File.Exists("DebugUID.txt") && chkDebug.Checked)
@@ -99,7 +106,8 @@ namespace WorkerTest
 
                         int cont = 0;
                         int DocNo = Int32.Parse(txtDocNoSt.Text);
-                        string txtRow = "";
+
+                        string[] urlarr = txtUrl.Text.Split('/');
 
                         byte[] bytes;
                         string cmbUid;
@@ -109,10 +117,23 @@ namespace WorkerTest
                             cmbUid = "";
                             //Cusref, SmartracBatch, ChipLot, IdentifierChip, IdentifierOS, IdentifierOSVersion, UID, BoxNr, status, teststatus, info1, info2, info3, info4, info5, ProductionDate, DateTime
                             //lvi.SubItems.Add(dataReader["COURSE_NAME"].ToString());
+                            string txtRow = "";
 
                             string tUrlRw = txtUrl.Text + DocNo.ToString() + "/";
-                            txtRow = tUrlRw + "\n";
-                            txtRow = "{\"Cusref\": \"" + txtView.Text + "\",";
+
+                            string tJsonRw = "{\"index\":{\"_index\":\""+ urlarr[3] + "\",\"_type\":\"" + urlarr[4] + "\",\"_id\":" + DocNo.ToString() + "}}";
+                            if (cbxJson.Checked)
+                            {
+                                txtRow += tJsonRw + "\r\n";
+                                txtRow += "{\"Cusref\": \"" + txtView.Text + "\",";
+                            }
+                            else
+                            {
+                                //txtRow = tUrlRw + "\n";
+                                txtRow += "{\"Cusref\": \"" + txtView.Text + "\",";
+                            }
+                            
+                            //txtRow = "{\"Cusref\": \"" + txtView.Text + "\",";
                             txtRow += " \"SmartracBatch\": \"" + row["SmartracBatch"].ToString() + "\",";
                             txtRow += " \"ChipLot\": \"" + row["ChipLot"].ToString() + "\",";
                             txtRow += " \"IdentifierChip\": \"" + row["IdentifierChip"].ToString() + "\", ";
@@ -160,7 +181,6 @@ namespace WorkerTest
 
                             if (row["ProductionDate"].ToString() != "")
                             {
-                                //DateTime.ParseExact(dr["empDOB"].toString(), "dd/MM/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
                                 DateTime rowDt = (DateTime)row["ProductionDate"];
                                 txtRow += " \"ProductionDate\": \"" + rowDt.ToString("yyyy-MM-dd") + "T" + rowDt.ToString("HH:mm:ss") + "Z" + "\",";
                             }
@@ -171,9 +191,6 @@ namespace WorkerTest
 
                             if (row["DateTime"].ToString() != "")
                             {
-                                //string[] pdDate = row["DateTime"].ToString().Split(' ');
-                                //txtRow += " \"DateTime\": \"" + pdDate[0] + "T" + pdDate[1] + "Z" + "\"";
-
                                 DateTime rowDt = (DateTime)row["DateTime"];
                                 txtRow += " \"DateTime\": \"" + rowDt.ToString("yyyy-MM-dd") + "T" + rowDt.ToString("HH:mm:ss") + "Z" + "\"";
                             }
@@ -190,7 +207,27 @@ namespace WorkerTest
                             SetText(txtShow);
                             Application.DoEvents();
                             
-                            if (DUMMPER) DumpToElastic(tUrlRw, txtRow);
+                            if (DUMMPER)
+                            {
+                                if (cbxJson.Checked)
+                                {
+                                    // Json file Generate
+                                    string path = @"json\" + txtView.Text + ".json";
+                                    if (File.Exists(path) && cbxJson.Checked)
+                                    {
+                                        StreamWriter w = File.AppendText(path);
+                                        w.WriteLine(txtRow);
+                                        w.Flush();
+                                        w.Close();
+                                    }
+                                }
+                                else
+                                {
+                                    DumpToElastic(tUrlRw, txtRow);
+                                }
+                                    
+                            }
+                                
 
                             //lblRows.Text = cont.ToString();
                             //AddMessage()
@@ -202,6 +239,8 @@ namespace WorkerTest
                         {
                             txtDocNoSt.Text = (DocNo).ToString();
                             WriteCounter(DocNo);
+
+                            lblSucc.Text = "ElasticSerach Server update completed.";
                         }
                         //txtResText.Text = txtRow;
                     }
@@ -309,6 +348,10 @@ namespace WorkerTest
 
         private void btnGo_Click(object sender, EventArgs e)
         {
+            if (cbxJson.Checked)
+            {
+                MessageBox.Show("จะสร้างไฟล์ JSON แต่ไม่มีการ Import ผ่านทาง http");
+            }
             if (MessageBox.Show("Confirm Insert to ElasticSearch", "Confirm !", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
                 if (txtQuery.Text == "" || txtView.Text == "" || txtDocNoSt.Text == "") return;
@@ -316,7 +359,6 @@ namespace WorkerTest
                 DUMMPER = true;
                 QueryFromDB();
             }
-            lblSucc.Text = "ElasticSerach Server update completed.";
         }
 
         private void frmDbMgr_Load(object sender, EventArgs e)
@@ -354,6 +396,10 @@ namespace WorkerTest
             tr.Close();
             return true;
         }
-        
+
+        private void cbxJson_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
