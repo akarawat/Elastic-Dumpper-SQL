@@ -141,32 +141,6 @@ namespace WorkerTest
                 // The using statement also closes the StreamReader
                 using (StreamReader sr = new StreamReader(file))
                 {
-                    /*
-                    //until end of the file
-                    while((nextChar = sr.Read()) != -1)
-                    {
-                        //has the operation been cancelled
-                        if (worker.CancellationPending == true)
-                        {
-                            e.Cancel = true;
-                            break;
-                        }
-                        else
-                        {
-                            //Now process the character
-                            AnalyseChar((char)nextChar);
-                            bytesProcessed += 1;
-                            //Report back every 100000 chars
-                            if (bytesProcessed % 100000 == 0)
-                            {
-                                //report progress
-                                //actual percentage calculated on number of processed bytes
-                                progress =(int)Math.Ceiling(((float)bytesProcessed / fileLength) * 100);
-                                worker.ReportProgress(progress, bytesProcessed);
-                            }
-                        }
-                    }
-                    */
                     /////////////////////
 
                     string line;

@@ -78,13 +78,11 @@ namespace WorkerTest
                 string query = txtQuery.Text.Trim();
                 if (OpenConnection() == true)
                 {
+                    string pathJson = @"json\" + txtView.Text + DateTime.Now.ToString("yyMMddHHmmss") + ".json";
+
                     if (DUMMPER && cbxJson.Checked)
                     {
-                        string path = @"json\" + txtView.Text + ".json";
-                        if (!File.Exists(path))
-                        {
-                            File.Create(path).Dispose();
-                        }
+                        File.Create(pathJson).Dispose();
                     }
                     try
                     {
@@ -108,8 +106,7 @@ namespace WorkerTest
                         int DocNo = Int32.Parse(txtDocNoSt.Text);
 
                         string[] urlarr = txtUrl.Text.Split('/');
-
-                        byte[] bytes;
+                                                
                         string cmbUid;
                         foreach (DataRow row in dt.Rows)
                         {
@@ -212,10 +209,10 @@ namespace WorkerTest
                                 if (cbxJson.Checked)
                                 {
                                     // Json file Generate
-                                    string path = @"json\" + txtView.Text + ".json";
-                                    if (File.Exists(path) && cbxJson.Checked)
+                                    //string path = @"json\" + txtView.Text + ".json";
+                                    if (File.Exists(pathJson) && cbxJson.Checked)
                                     {
-                                        StreamWriter w = File.AppendText(path);
+                                        StreamWriter w = File.AppendText(pathJson);
                                         w.WriteLine(txtRow);
                                         w.Flush();
                                         w.Close();
@@ -241,6 +238,7 @@ namespace WorkerTest
                             WriteCounter(DocNo);
 
                             lblSucc.Text = "ElasticSerach Server update completed.";
+
                         }
                         //txtResText.Text = txtRow;
                     }
